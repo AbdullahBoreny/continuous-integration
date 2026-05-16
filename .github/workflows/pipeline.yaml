@@ -15,4 +15,5 @@ jobs:
           node-version: '24'
       - name: Install dependencies
         run: npm install --force
-      - run: npm run eslint 
+      - run: npm run eslint
+      - run: npm run test
