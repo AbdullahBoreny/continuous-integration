@@ -12,6 +12,10 @@ jobs:
       - name: Say Hello
         run: |
           echo "Hello World!"
-      - name: npm install
-        script: |
-          npm install
+      - name: Run date 
+        run: |
+            date
+      - name: Run ls -l 
+        run: |
+            ls -l
+
