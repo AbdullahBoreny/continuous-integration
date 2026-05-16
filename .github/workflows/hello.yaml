@@ -13,5 +13,5 @@ jobs:
         run: |
           echo "Hello World!"
       - name: npm install
-        run: |
+        script: |
           npm install
