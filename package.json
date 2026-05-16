@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/smartlyio/fullstackopen-cicd#readme",
   "dependencies": {
+    "@eslint/js": "^10.0.1",
     "axios": "^1.13.6",
     "express": "^5.2.1",
     "react": "^19.2.4",
@@ -32,7 +33,9 @@
   },
   "jest": {
     "testEnvironment": "jsdom",
-    "setupFiles": ["<rootDir>/jest.setup.js"]
+    "setupFiles": [
+      "<rootDir>/jest.setup.js"
+    ]
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",
