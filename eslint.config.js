@@ -11,6 +11,7 @@ module.exports = [
       'webpack.config.js',
       'eslint.config.js',
       'jest.setup.js',
+      'e2e-tests',
       '.eslintrc.js',
       'node_modules/**',
       'dist/**'
