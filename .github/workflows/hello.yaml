@@ -12,3 +12,5 @@ jobs:
       - name: Say Hello
         run: |
           echo "Hello World!"
+      - name: run npm install
+          npm install
