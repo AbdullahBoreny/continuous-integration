@@ -1,13 +1,16 @@
-const js = require('@eslint/js')
-const react = require('eslint-plugin-react')
-const jest = require('eslint-plugin-jest')
-const globals = require('globals')
+const js = require('@eslint/js');
+const react = require('eslint-plugin-react');
+const jest = require('eslint-plugin-jest');
+const globals = require('globals');
 
 module.exports = [
   {
+
     ignores: [
+
       'webpack.config.js',
       'eslint.config.js',
+      'jest.setup.js',
       '.eslintrc.js',
       'node_modules/**',
       'dist/**'
@@ -27,7 +30,6 @@ module.exports = [
       'indent': ['error', 2],
       'linebreak-style': ['error', 'unix'],
       'quotes': ['error', 'single'],
-      'semi': ['error', 'never'],
       'eqeqeq': 'error',
       'no-trailing-spaces': 'error',
       'object-curly-spacing': ['error', 'always'],
@@ -63,8 +65,12 @@ module.exports = [
     rules: {
       ...react.configs.recommended.rules,
       'indent': ['error', 2],
+      'no-console': 'off',
       'linebreak-style': ['error', 'unix'],
       'quotes': ['error', 'single'],
+      'no-trailing-spaces': 'error',
+      'object-curly-spacing': ['error', 'always'],
+      'arrow-spacing': ['error', { before: true, after: true }],
       'semi': ['error', 'never'],
       'eqeqeq': 'error',
       'no-trailing-spaces': 'error',
@@ -74,4 +80,4 @@ module.exports = [
       'react/prop-types': 0
     }
   }
-]
+];
