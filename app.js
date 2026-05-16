@@ -17,4 +17,10 @@ app.get('/health', (req, res) => {
 
   res.send('ok');
 });
+//feature branch edit
+app.get('/feature', (req, res) => {
+
+  res.json('feature');
+});
+//edit
 start();
