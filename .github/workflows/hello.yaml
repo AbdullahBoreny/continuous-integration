@@ -12,10 +12,15 @@ jobs:
       - name: Say Hello
         run: |
           echo "Hello World!"
-      - name: Run date 
+  print_date_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run date command 
         run: |
             date
-      - name: Run ls -l 
+  file_contents_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run list file command 
         run: |
             ls -l
-
