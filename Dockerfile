@@ -26,7 +26,7 @@ RUN apt-get update -qq && \
 COPY . .
 
 # Build application
-RUN npm run build
+RUN npm run start-prod
 
 # Remove development dependencies
 
