@@ -20,9 +20,7 @@ FROM base AS build
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential node-gyp pkg-config python-is-python3
 
-# Install node modules
-COPY package-lock.json package.json ./
-RUN npm ci --include=dev --legacy-peer-deps
+
 
 # Copy application code
 COPY . .
@@ -32,7 +30,6 @@ RUN npm run build
 
 # Remove development dependencies
 
-RUN npm prune --production
 
 # Final stage for app image
 FROM base
