@@ -30,16 +30,16 @@ jobs:
             WEBHOOK_PAYLOAD: ${{ steps.webhook.outputs.payload }}
             WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK }}
             with:
-            script: |
-              const axios = require("axios")
+                script: |
+                  const axios = require("axios")
 
-              const { WEBHOOK_PAYLOAD, WEBHOOK_URL } = process.env
+                  const { WEBHOOK_PAYLOAD, WEBHOOK_URL } = process.env
 
-              const payload = JSON.parse(WEBHOOK_PAYLOAD)
-              payload.title = "hello_world_job"
-              payload.name = "nigaa"
-              // modify payload as you like
-              delete payload.embeds[0].color
+                  const payload = JSON.parse(WEBHOOK_PAYLOAD)
+                  payload.title = "hello_world_job"
+                  payload.name = "nigaa"
+                  // modify payload as you like
+                  delete payload.embeds[0].color
 
-              // send to Discord
-              axios.post(WEBHOOK_URL, payload)
+                  // send to Discord
+                  axios.post(WEBHOOK_URL, payload)
