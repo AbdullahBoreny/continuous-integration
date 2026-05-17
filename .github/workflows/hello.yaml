@@ -22,7 +22,9 @@ jobs:
         uses: sarisia/actions-status-discord@v1
         if: always() # Ensures it runs on both success and failure
         with:
+        
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          content: "Hey <@316911818725392384>"
           status: ${{ job.status }} 
           title: ${{ job.status == 'success' && 'Deployment Successful!' || 'Build Failed!' }}
           description: |
