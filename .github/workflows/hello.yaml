@@ -18,28 +18,18 @@ jobs:
       - name: Run list file command 
         run: |
             ls -l
-      - uses: sarisia/actions-status-discord@v1
-        if: always()
-        id: webhook # set id to reference output payload later
+      - name: Discord notification
+        uses: sarisia/actions-status-discord@v1
+        if: always() # Ensures it runs on both success and failure
         with:
-          nofail: false
-          ack_no_webhook: true # set this to suppress error which is raised when nofail is disabled and webhook is not set
-      - run: npm install --force axios
-      - uses: actions/github-script@v7
-        env:
-            WEBHOOK_PAYLOAD: ${{ steps.webhook.outputs.payload }}
-            WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK }}
-            with:
-              script: |
-                const axios = require("axios")
-
-                const { WEBHOOK_PAYLOAD, WEBHOOK_URL } = process.env
-
-                const payload = JSON.parse(WEBHOOK_PAYLOAD)
-                payload.title = "hello_world_job"
-                payload.name = "nigaa"
-                // modify payload as you like
-                delete payload.embeds[0].color
-
-                // send to Discord
-                axios.post(WEBHOOK_URL, payload)
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          status: ${{ job.status }} 
+          title: ${{ job.status == 'success' && 'Deployment Successful!' || 'Build Failed!' }}
+          description: |
+            **Repository:** ${{ github.repository }}
+            **Branch:** ${{ github.ref_name }}
+            **Commit:** ${{ github.sha }}
+            **Message:** ${{ github.event.head_commit.message }}
+            **Author:** ${{ github.actor }}
+          color: ${{ job.status == 'success' ? 0x28a745 : 0xcb2431 }}
+          username: "Fullstack part 11 Hook"
