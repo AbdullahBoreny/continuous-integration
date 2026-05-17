@@ -20,13 +20,15 @@ FROM base AS build
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential node-gyp pkg-config python-is-python3
 
-
+# Install node modules
+COPY package-lock.json package.json ./
+RUN npm ci --include=dev --legacy-peer-deps
 
 # Copy application code
 COPY . .
 
 # Build application
-RUN node app.js
+RUN npm run build
 
 # Remove development dependencies
 
