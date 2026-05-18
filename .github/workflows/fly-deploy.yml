@@ -87,7 +87,7 @@ jobs:
         username: ${{github.actor}}
 
   tag_release:
-    needs: [deploy_pipeline]
+    needs: [e2e_tests]
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ','), '#skip') }}
     steps:
@@ -99,7 +99,7 @@ jobs:
 
   notify_success:
     runs-on: ubuntu-latest
-    needs: [deploy_pipeline]
+    needs: [tag_release]
     if: ${{ success() }}
     steps:
     - name: Successful notification 
