@@ -28,7 +28,7 @@ RUN npm ci --include=dev --legacy-peer-deps
 COPY . .
 
 # Build application
-RUN npm run build
+RUN npm run builds
 
 # Remove development dependencies
 
