@@ -50,22 +50,22 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    notifyDiscord:
-      needs: [simple_deployment_pipeline]
-      runs-on: ubuntu-latest
-      uses: sarisia/actions-status-discord@v1
-      if: failure()
-      with:
-        webhook: ${{ secrets.DISCORD_WEBHOOK }}
-        content: "Hey <@675998523770011659>"
-        status: ${{ job.status }} 
-        title: "deploy"
-        description: |
-          **Repository:** ${{ github.repository }}
-          **Branch:** ${{ github.ref_name }}
-          **Commit:** ${{ github.sha }}
-          **Message:** ${{ github.event.head_commit.message }}
-          **Author:** ${{ github.actor }}
-        color: 0xfd413f
-        
-        username: "Fullstack part 11 Hook"
+  notifyDiscord:
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-latest
+    uses: sarisia/actions-status-discord@v1
+    if: failure()
+    with:
+      webhook: ${{ secrets.DISCORD_WEBHOOK }}
+      content: "Hey <@675998523770011659>"
+      status: ${{ job.status }} 
+      title: "deploy"
+      description: |
+        **Repository:** ${{ github.repository }}
+        **Branch:** ${{ github.ref_name }}
+        **Commit:** ${{ github.sha }}
+        **Message:** ${{ github.event.head_commit.message }}
+        **Author:** ${{ github.actor }}
+      color: 0xfd413f
+      
+      username: "Fullstack part 11 Hook"
