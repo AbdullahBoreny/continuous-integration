@@ -44,8 +44,8 @@ jobs:
 
 
   e2e_tests:
-    timeout-minutes: 60
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     needs: [deploy_pipeline]
     steps:
      - uses: actions/checkout@v5
@@ -54,8 +54,7 @@ jobs:
          node-version: '24'
      - name: Install dependencies
        run: npm install --force
-     - name: Install Playwright Browsers
-       run: npx playwright install --force
+     - run: npx playwright install --with-deps
      - run: npm run e2e-test
      - uses: actions/upload-artifact@v5
        if: ${{ !cancelled() }}
