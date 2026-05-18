@@ -22,8 +22,16 @@ jobs:
           node-version: '24'
       - name: Install dependencies
         run: npm install --force
-      - run: npm run test
+      - name: Install Playwright Browsers
+        run: npx playwright install --force
       - run: npm run e2e-test
+      - uses: actions/upload-artifact@v5
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
+      - run: npm run test
       - run: npm run eslint
 
 
