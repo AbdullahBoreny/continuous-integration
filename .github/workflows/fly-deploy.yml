@@ -49,11 +49,13 @@ jobs:
       uses: anothrNick/github-tag-action@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Discord notification
+
+    notifyDiscord:
+      needs: [simple_deployment_pipeline]
+      runs-on: ubuntu-latest
       uses: sarisia/actions-status-discord@v1
-      if: failure() # Ensures it runs on both success and failure
+      if: failure()
       with:
-      
         webhook: ${{ secrets.DISCORD_WEBHOOK }}
         content: "Hey <@675998523770011659>"
         status: ${{ job.status }} 
