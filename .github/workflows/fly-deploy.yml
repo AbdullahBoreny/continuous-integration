@@ -57,7 +57,7 @@ jobs:
         webhook: ${{ secrets.DISCORD_WEBHOOK }}
         content: "Hey <@675998523770011659>"
         status: ${{ job.status }} 
-        title: ${{ job.status == 'success' && 'Deployment Successful!' || 'Build Failed!' }}
+        title: "deploy"
         description: |
           **Repository:** ${{ github.repository }}
           **Branch:** ${{ github.ref_name }}
