@@ -44,7 +44,7 @@ jobs:
         with:
         
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          content: "Hey <@675998523770011659>"
+          content: "Hey <@1180560284155396146>"
           status: ${{ job.status }} 
           title: ${{ job.status == 'success' && 'Deployment Successful!' || 'Build Failed!' }}
           description: |
