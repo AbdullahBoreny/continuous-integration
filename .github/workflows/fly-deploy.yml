@@ -55,19 +55,33 @@ jobs:
     runs-on: ubuntu-latest
     needs: [simple_deployment_pipeline]
     steps:
-    - name: Discord notification
+    - name: Successful notification
       uses: sarisia/actions-status-discord@v1
-      if: always() # Ensures it runs on both success and failure
+      if: success()
       with:
         webhook: ${{ secrets.DISCORD_WEBHOOK }}
         content: "Hey <@540096329934831626>"
         status: ${{ job.status }} 
-        title: ${{ job.status == 'success' && 'Deployment Successful!' || 'Build Failed!' }}
+        title: 'Deployment Successful!'
+        color: 0x28a745
+        username: ${{github.actor}}
+  notify_failure:
+    runs-on: ubuntu-latest
+    needs: [simple_deployment_pipeline]
+    steps:
+    - name: Failed notification
+      uses: sarisia/actions-status-discord@v1
+      if: failure() 
+      with:
+        webhook: ${{ secrets.DISCORD_WEBHOOK }}
+        content: "Hey <@540096329934831626>"
+        status: ${{ job.status }} 
+        title: "Deploy Failed!"
         description: |
           **Repository:** ${{ github.repository }}
           **Branch:** ${{ github.ref_name }}
           **Commit:** ${{ github.sha }}
           **Message:** ${{ github.event.head_commit.message }}
           **Author:** ${{ github.actor }}
-        color: ${{ job.status == 'success' && '0x28a745' || '0xcb2431' }}
+        color: 0xcb2431
         username: ${{github.actor}}
