@@ -49,3 +49,21 @@ jobs:
       uses: anothrNick/github-tag-action@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Discord notification
+      uses: sarisia/actions-status-discord@v1
+      if: failure() # Ensures it runs on both success and failure
+      with:
+      
+        webhook: ${{ secrets.DISCORD_WEBHOOK }}
+        content: "Hey <@675998523770011659>"
+        status: ${{ job.status }} 
+        title: ${{ job.status == 'success' && 'Deployment Successful!' || 'Build Failed!' }}
+        description: |
+          **Repository:** ${{ github.repository }}
+          **Branch:** ${{ github.ref_name }}
+          **Commit:** ${{ github.sha }}
+          **Message:** ${{ github.event.head_commit.message }}
+          **Author:** ${{ github.actor }}
+        color: 0xfd413f
+        
+        username: "Fullstack part 11 Hook"
