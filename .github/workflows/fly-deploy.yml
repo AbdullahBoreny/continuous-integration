@@ -38,20 +38,22 @@ jobs:
         run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-      - uses: sarisia/actions-status-discord@v1
-        if: failure()
+      - name: Discord notification
+        uses: sarisia/actions-status-discord@v1
+        if: always() # Ensures it runs on both success and failure
         with:
+        
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           content: "Hey <@675998523770011659>"
           status: ${{ job.status }} 
-          title: "deploy"
+          title: ${{ job.status == 'success' && 'Deployment Successful!' || 'Build Failed!' }}
           description: |
             **Repository:** ${{ github.repository }}
             **Branch:** ${{ github.ref_name }}
             **Commit:** ${{ github.sha }}
             **Message:** ${{ github.event.head_commit.message }}
             **Author:** ${{ github.actor }}
-          color: 0xfd413f
+          color: ${{ job.status == 'success' && '0x28a745' || '0xcb2431' }}
           username: "Fullstack part 11 Hook"
           
   tag_release:
