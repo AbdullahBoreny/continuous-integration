@@ -48,7 +48,7 @@ jobs:
 
   notify_failure:
     runs-on: ubuntu-latest
-    needs: [simple_deployment_pipeline]
+    needs: [deploy_pipeline]
     if: ${{ failure() }}
     steps:
     - name: Failed notification
@@ -69,7 +69,7 @@ jobs:
         username: ${{github.actor}}
 
   tag_release:
-    needs: [simple_deployment_pipeline]
+    needs: [deploy_pipeline]
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ','), '#skip') }}
     steps:
@@ -81,7 +81,7 @@ jobs:
 
   notify_success:
     runs-on: ubuntu-latest
-    needs: [simple_deployment_pipeline]
+    needs: [deploy_pipeline]
     if: ${{ success() }}
     steps:
     - name: Successful notification 
