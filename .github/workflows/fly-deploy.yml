@@ -42,18 +42,18 @@ jobs:
         uses: sarisia/actions-status-discord@v1
         if: failure() 
         with:
-        webhook: ${{ secrets.DISCORD_WEBHOOK }}
-        content: "Hey <@1180560284155396146>"
-        status: ${{ job.status }} 
-        title: "Deploy Failed!"
-        description: |
-          **Repository:** ${{ github.repository }}
-          **Branch:** ${{ github.ref_name }}
-          **Commit:** ${{ github.sha }}
-          **Message:** ${{ github.event.head_commit.message }}
-          **Author:** ${{ github.actor }}
-        color: 0xcb2431
-        username: ${{github.actor}}
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          content: "Hey <@1180560284155396146>"
+          status: ${{ job.status }} 
+          title: "Deploy Failed!"
+          description: |
+            **Repository:** ${{ github.repository }}
+            **Branch:** ${{ github.ref_name }}
+            **Commit:** ${{ github.sha }}
+            **Message:** ${{ github.event.head_commit.message }}
+            **Author:** ${{ github.actor }}
+          color: 0xcb2431
+          username: ${{github.actor}}
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-latest
